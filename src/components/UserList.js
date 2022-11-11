@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
 export default function UserList({ users, getUsers }) {
   useEffect(() => {
@@ -6,11 +6,9 @@ export default function UserList({ users, getUsers }) {
   }, []);
 
   async function deleteUser(id) {
-    const res = await fetch(`http://localhost:5000/users/${id}`, {
+    await fetch(`http://localhost:5000/users/${id}`, {
       method: "DELETE",
     });
-    const data = await res.json();
-    console.log(data);
     getUsers();
   }
 

@@ -35,15 +35,15 @@ export default function Form({ getUsers }) {
   }
 
   async function addUser() {
-    const res = await fetch("http://localhost:5000/users", {
+    await fetch("http://localhost:5000/users", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ firstname, lastname, email, password }),
-    });
-    const data = await res.json();
-    console.log(data);
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data));
     getUsers();
   }
 
