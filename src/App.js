@@ -7,7 +7,7 @@ import { useState } from "react";
 export default function App() {
   //par défaut json server ajoute un champ id à chaque objet créé et
   //incrémente/décrémente automatiquement selon l'ajout ou la suppression d'objets
-
+  //on ajoute quand même un champ id pour l'édition utilisateur
   const [users, setUsers] = useState([]);
 
   const [userData, setUserData] = useState({
@@ -18,15 +18,15 @@ export default function App() {
     id: 0,
   });
 
-  //ajout d'un champ id pour l'édition utilisateur
-  const [id, setId] = useState(0);
-
   const [isEdit, setIsEdit] = useState(false);
 
   async function getUsers() {
-    const res = await fetch("http://localhost:5000/users");
-    const data = await res.json();
-    setUsers(data);
+    await fetch("http://localhost:5000/users")
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setUsers(data);
+      });
   }
 
   return (
