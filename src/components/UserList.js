@@ -16,6 +16,7 @@ export default function UserList({ users, getUsers, setIsEdit, setUserData, setI
     const data = await fetch(`http://localhost:5000/users/${id}`);
     const user = await data.json();
     //on passe les valeurs de l'utilisateur à éditer dans les champs du formulaire
+    console.log(user);
     setIsEdit(true);
 
     setUserData({

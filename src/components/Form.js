@@ -97,7 +97,7 @@ export default function Form({ userData, setUserData, id, setId, isEdit, setIsEd
               </label>
             </div>
           </div>
-          <button type="submit">envoyer</button>
+          <button type="submit">{isEdit ? "Éditer utilisateur" : "Ajouter utilisateur"}</button>
         </form>
       </div>
     </>
