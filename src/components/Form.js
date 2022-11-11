@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function App() {
+export default function Form({ getUsers }) {
   //par défaut json server ajoute un champ id à chaque objet créé et
   //incrémente/décrémente automatiquement selon l'ajout ou la suppression d'objets
 
@@ -44,6 +44,7 @@ export default function App() {
     });
     const data = await res.json();
     console.log(data);
+    getUsers();
   }
 
   return (

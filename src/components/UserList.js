@@ -1,14 +1,6 @@
 import { useState, useEffect } from "react";
 
-export default function UserList() {
-  const [users, setUsers] = useState([]);
-
-  async function getUsers() {
-    const res = await fetch("http://localhost:5000/users");
-    const data = await res.json();
-    setUsers(data);
-  }
-
+export default function UserList({ users, getUsers }) {
   useEffect(() => {
     getUsers();
   }, []);
