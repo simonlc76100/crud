@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-export default function UserList({ users, getUsers, setIsEdit, setFirstname, setLastname, setEmail, setPassword, setId }) {
+export default function UserList({ users, getUsers, setIsEdit, setUserData, setId }) {
   useEffect(() => {
     getUsers();
   }, []);
@@ -18,10 +18,13 @@ export default function UserList({ users, getUsers, setIsEdit, setFirstname, set
     //on passe les valeurs de l'utilisateur à éditer dans les champs du formulaire
     setIsEdit(true);
 
-    setFirstname(user.firstname);
-    setLastname(user.lastname);
-    setEmail(user.email);
-    setPassword(user.password);
+    setUserData({
+      firstname: user.firstname,
+      lastname: user.lastname,
+      email: user.email,
+      password: user.password,
+    });
+
     setId(user.id);
   }
 

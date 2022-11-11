@@ -10,10 +10,13 @@ export default function App() {
 
   const [users, setUsers] = useState([]);
 
-  const [firstname, setFirstname] = useState("");
-  const [lastname, setLastname] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [userData, setUserData] = useState({
+    firstname: "",
+    lastname: "",
+    email: "",
+    password: "",
+  });
+
   //ajout d'un champ id pour l'édition utilisateur
   const [id, setId] = useState(0);
 
@@ -28,14 +31,8 @@ export default function App() {
   return (
     <div className="app-container">
       <Form
-        firstname={firstname}
-        setFirstname={setFirstname}
-        lastname={lastname}
-        setLastname={setLastname}
-        email={email}
-        setEmail={setEmail}
-        password={password}
-        setPassword={setPassword}
+        userData={userData}
+        setUserData={setUserData}
         id={id}
         setId={setId}
         isEdit={isEdit}
@@ -46,10 +43,7 @@ export default function App() {
         users={users}
         getUsers={getUsers}
         setIsEdit={setIsEdit}
-        setFirstname={setFirstname}
-        setLastname={setLastname}
-        setEmail={setEmail}
-        setPassword={setPassword}
+        setUserData={setUserData}
         setId={setId}
       />
     </div>

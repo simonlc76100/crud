@@ -1,18 +1,18 @@
-export default function Form({ firstname, setFirstname, lastname, setLastname, email, setEmail, password, setPassword, id, setId, isEdit, setIsEdit, getUsers }) {
+export default function Form({ userData, setUserData, id, setId, isEdit, setIsEdit, getUsers }) {
   function handleChange(e) {
     const { name, value } = e.target;
     switch (name) {
       case "firstname":
-        setFirstname(value);
+        setUserData({ ...userData, firstname: value });
         break;
       case "lastname":
-        setLastname(value);
+        setUserData({ ...userData, lastname: value });
         break;
       case "email":
-        setEmail(value);
+        setUserData({ ...userData, email: value });
         break;
       case "password":
-        setPassword(value);
+        setUserData({ ...userData, password: value });
         break;
       default:
         break;
@@ -36,16 +36,12 @@ export default function Form({ firstname, setFirstname, lastname, setLastname, e
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ firstname, lastname, email, password }),
+      body: JSON.stringify({ ...userData }),
     })
       .then((res) => res.json())
       .then((data) => console.log(data));
     getUsers();
-
-    setFirstname("");
-    setLastname("");
-    setEmail("");
-    setPassword("");
+    setUserData({ firstname: "", lastname: "", email: "", password: "" });
   }
 
   async function editUser(id) {
@@ -55,7 +51,7 @@ export default function Form({ firstname, setFirstname, lastname, setLastname, e
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ firstname, lastname, email, password }),
+      body: JSON.stringify({ ...userData }),
     })
       .then((res) => res.json())
       .then((data) => console.log(data));
@@ -65,10 +61,7 @@ export default function Form({ firstname, setFirstname, lastname, setLastname, e
 
     setId(0);
 
-    setFirstname("");
-    setLastname("");
-    setEmail("");
-    setPassword("");
+    setUserData({ firstname: "", lastname: "", email: "", password: "" });
   }
 
   return (
@@ -80,13 +73,13 @@ export default function Form({ firstname, setFirstname, lastname, setLastname, e
             <div className="input-container">
               <label>
                 Prénom
-                <input type="text" name="firstname" value={firstname} onChange={handleChange} />
+                <input type="text" name="firstname" value={userData.firstname} onChange={handleChange} />
               </label>
             </div>
             <div className="input-container">
               <label>
                 Nom
-                <input type="text" name="lastname" value={lastname} onChange={handleChange} />
+                <input type="text" name="lastname" value={userData.lastname} onChange={handleChange} />
               </label>
             </div>
           </div>
@@ -94,13 +87,13 @@ export default function Form({ firstname, setFirstname, lastname, setLastname, e
             <div className="input-container">
               <label>
                 Email
-                <input type="email" name="email" value={email} onChange={handleChange} />
+                <input type="email" name="email" value={userData.email} onChange={handleChange} />
               </label>
             </div>
             <div className="input-container">
               <label>
                 Mot de passe
-                <input type="password" name="password" value={password} onChange={handleChange} />
+                <input type="password" name="password" value={userData.password} onChange={handleChange} />
               </label>
             </div>
           </div>
