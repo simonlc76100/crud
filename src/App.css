@@ -11,6 +11,14 @@ p{
     display: flex;
 }
 
-.container-UserList p{
+.userlist-container p{
     min-width: 150px;
+}
+
+.section{
+    display:flex
+}
+
+.input-container input{
+    display: block;
 }

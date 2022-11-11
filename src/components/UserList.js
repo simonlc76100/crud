@@ -14,7 +14,7 @@ export default function UserList() {
   }, []);
 
   return (
-    <div className="container-UserList">
+    <div className="userlist-container">
       <div className="titles">
         <p>Prénom</p>
         <p>Nom</p>

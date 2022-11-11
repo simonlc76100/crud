@@ -48,26 +48,37 @@ export default function App() {
 
   return (
     <>
-      <div className="container-form">
+      <div className="form-container">
         <div className="title">Formulaire Utilisateur</div>
         <form className="user-form" onSubmit={handleSubmit}>
-          <label>
-            Prénom
-            <input type="text" name="firstname" value={firstname} onChange={handleChange} />
-          </label>
-          <label>
-            Nom
-            <input type="text" name="lastname" value={lastname} onChange={handleChange} />
-          </label>
-          <label>
-            Email
-            <input type="email" name="email" value={email} onChange={handleChange} />
-          </label>
-          <label>
-            Mot de passe
-            <input type="password" name="password" value={password} onChange={handleChange} />
-          </label>
-
+          <div className="section">
+            <div className="input-container">
+              <label>
+                Prénom
+                <input type="text" name="firstname" value={firstname} onChange={handleChange} />
+              </label>
+            </div>
+            <div className="input-container">
+              <label>
+                Nom
+                <input type="text" name="lastname" value={lastname} onChange={handleChange} />
+              </label>
+            </div>
+          </div>
+          <div className="section">
+            <div className="input-container">
+              <label>
+                Email
+                <input type="email" name="email" value={email} onChange={handleChange} />
+              </label>
+            </div>
+            <div className="input-container">
+              <label>
+                Mot de passe
+                <input type="password" name="password" value={password} onChange={handleChange} />
+              </label>
+            </div>
+          </div>
           <button type="submit">envoyer</button>
         </form>
       </div>
