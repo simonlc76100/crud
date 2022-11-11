@@ -41,6 +41,11 @@ export default function Form({ firstname, setFirstname, lastname, setLastname, e
       .then((res) => res.json())
       .then((data) => console.log(data));
     getUsers();
+
+    setFirstname("");
+    setLastname("");
+    setEmail("");
+    setPassword("");
   }
 
   async function editUser(id) {
