@@ -1,0 +1,16 @@
+p{
+    margin: 0;
+    padding: 0;
+}
+
+.titles{
+    display: flex;
+}
+
+.user{
+    display: flex;
+}
+
+.container-UserList p{
+    min-width: 150px;
+}
