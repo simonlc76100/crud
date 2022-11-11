@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-export default function UserList({ users, getUsers, setIsEdit, setUserData, setId }) {
+export default function UserList({ users, getUsers, setIsEdit, setUserData }) {
   useEffect(() => {
     getUsers();
   }, []);
@@ -24,9 +24,8 @@ export default function UserList({ users, getUsers, setIsEdit, setUserData, setI
       lastname: user.lastname,
       email: user.email,
       password: user.password,
+      id: user.id,
     });
-
-    setId(user.id);
   }
 
   return (

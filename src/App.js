@@ -15,6 +15,7 @@ export default function App() {
     lastname: "",
     email: "",
     password: "",
+    id: 0,
   });
 
   //ajout d'un champ id pour l'édition utilisateur
@@ -33,8 +34,6 @@ export default function App() {
       <Form
         userData={userData}
         setUserData={setUserData}
-        id={id}
-        setId={setId}
         isEdit={isEdit}
         setIsEdit={setIsEdit}
         getUsers={getUsers}
@@ -44,7 +43,6 @@ export default function App() {
         getUsers={getUsers}
         setIsEdit={setIsEdit}
         setUserData={setUserData}
-        setId={setId}
       />
     </div>
   );

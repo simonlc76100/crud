@@ -1,4 +1,4 @@
-export default function Form({ userData, setUserData, id, setId, isEdit, setIsEdit, getUsers }) {
+export default function Form({ userData, setUserData, isEdit, setIsEdit, getUsers }) {
   function handleChange(e) {
     const { name, value } = e.target;
     switch (name) {
@@ -23,7 +23,7 @@ export default function Form({ userData, setUserData, id, setId, isEdit, setIsEd
     e.preventDefault();
     if (isEdit) {
       //edit user
-      editUser(id);
+      editUser(userData.id);
     } else {
       //add user
       addUser();
@@ -59,9 +59,7 @@ export default function Form({ userData, setUserData, id, setId, isEdit, setIsEd
 
     setIsEdit(false);
 
-    setId(0);
-
-    setUserData({ firstname: "", lastname: "", email: "", password: "" });
+    setUserData({ firstname: "", lastname: "", email: "", password: "", id: 0 });
   }
 
   return (
@@ -73,13 +71,23 @@ export default function Form({ userData, setUserData, id, setId, isEdit, setIsEd
             <div className="input-container">
               <label>
                 Prénom
-                <input type="text" name="firstname" value={userData.firstname} onChange={handleChange} />
+                <input
+                  type="text"
+                  name="firstname"
+                  value={userData.firstname}
+                  onChange={handleChange}
+                />
               </label>
             </div>
             <div className="input-container">
               <label>
                 Nom
-                <input type="text" name="lastname" value={userData.lastname} onChange={handleChange} />
+                <input
+                  type="text"
+                  name="lastname"
+                  value={userData.lastname}
+                  onChange={handleChange}
+                />
               </label>
             </div>
           </div>
@@ -87,17 +95,29 @@ export default function Form({ userData, setUserData, id, setId, isEdit, setIsEd
             <div className="input-container">
               <label>
                 Email
-                <input type="email" name="email" value={userData.email} onChange={handleChange} />
+                <input
+                  type="email"
+                  name="email"
+                  value={userData.email}
+                  onChange={handleChange}
+                />
               </label>
             </div>
             <div className="input-container">
               <label>
                 Mot de passe
-                <input type="password" name="password" value={userData.password} onChange={handleChange} />
+                <input
+                  type="password"
+                  name="password"
+                  value={userData.password}
+                  onChange={handleChange}
+                />
               </label>
             </div>
           </div>
-          <button type="submit">{isEdit ? "Éditer utilisateur" : "Ajouter utilisateur"}</button>
+          <button type="submit">
+            {isEdit ? "Éditer utilisateur" : "Ajouter utilisateur"}
+          </button>
         </form>
       </div>
     </>
