@@ -1,6 +1,9 @@
 import { useState } from "react";
 
 export default function App() {
+  //par défaut json server ajoute un champ id à chaque objet créé et
+  //incrémente/décrémente automatiquement selon l'ajout ou la suppression d'objets
+
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
@@ -28,7 +31,19 @@ export default function App() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(firstname, lastname, email, password);
+    addUser();
+  }
+
+  async function addUser() {
+    const res = await fetch("http://localhost:5000/users", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ firstname, lastname, email, password }),
+    });
+    const data = await res.json();
+    console.log(data);
   }
 
   return (
