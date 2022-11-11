@@ -48,7 +48,7 @@ export default function App() {
 
   return (
     <>
-      <div className="container">
+      <div className="container-form">
         <div className="title">Formulaire Utilisateur</div>
         <form className="user-form" onSubmit={handleSubmit}>
           <label>
