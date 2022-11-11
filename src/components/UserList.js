@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-export default function UserList({ users, getUsers }) {
+export default function UserList({ users, getUsers, setIsEdit, setFirstname, setLastname, setEmail, setPassword, setId }) {
   useEffect(() => {
     getUsers();
   }, []);
@@ -10,6 +10,19 @@ export default function UserList({ users, getUsers }) {
       method: "DELETE",
     });
     getUsers();
+  }
+
+  async function getUserToEdit(id) {
+    const data = await fetch(`http://localhost:5000/users/${id}`);
+    const user = await data.json();
+    //on passe les valeurs de l'utilisateur à éditer dans les champs du formulaire
+    setIsEdit(true);
+
+    setFirstname(user.firstname);
+    setLastname(user.lastname);
+    setEmail(user.email);
+    setPassword(user.password);
+    setId(user.id);
   }
 
   return (
@@ -35,7 +48,7 @@ export default function UserList({ users, getUsers }) {
           <p>{user.password}</p>
           <div>
             <button onClick={() => deleteUser(user.id)}>Supprimer</button>
-            <button>Éditer</button>
+            <button onClick={() => getUserToEdit(user.id)}>Éditer</button>
           </div>
         </div>
       ))}

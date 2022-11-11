@@ -1,14 +1,4 @@
-import { useState } from "react";
-
-export default function Form({ getUsers }) {
-  //par défaut json server ajoute un champ id à chaque objet créé et
-  //incrémente/décrémente automatiquement selon l'ajout ou la suppression d'objets
-
-  const [firstname, setFirstname] = useState("");
-  const [lastname, setLastname] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
+export default function Form({ firstname, setFirstname, lastname, setLastname, email, setEmail, password, setPassword, id, setId, isEdit, setIsEdit, getUsers }) {
   function handleChange(e) {
     const { name, value } = e.target;
     switch (name) {
@@ -31,7 +21,13 @@ export default function Form({ getUsers }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    addUser();
+    if (isEdit) {
+      //edit user
+      editUser(id);
+    } else {
+      //add user
+      addUser();
+    }
   }
 
   async function addUser() {
@@ -45,6 +41,29 @@ export default function Form({ getUsers }) {
       .then((res) => res.json())
       .then((data) => console.log(data));
     getUsers();
+  }
+
+  async function editUser(id) {
+    console.log(id);
+    await fetch(`http://localhost:5000/users/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ firstname, lastname, email, password }),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data));
+    getUsers();
+
+    setIsEdit(false);
+
+    setId(0);
+
+    setFirstname("");
+    setLastname("");
+    setEmail("");
+    setPassword("");
   }
 
   return (
