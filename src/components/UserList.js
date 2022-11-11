@@ -20,6 +20,14 @@ export default function UserList() {
     getUsers();
   }, []);
 
+  async function deleteUser(id) {
+    const res = await fetch(`http://localhost:5000/users/${id}`, {
+      method: "DELETE",
+    });
+    const data = await res.json();
+    console.log(data);
+  }
+
   return (
     <div className="userlist-container">
       <div className="titles"></div>
@@ -42,7 +50,7 @@ export default function UserList() {
           <p>{user.email}</p>
           <p>{user.password}</p>
           <div>
-            <button>Supprimer</button>
+            <button onClick={() => deleteUser(user.id)}>Supprimer</button>
             <button>Éditer</button>
           </div>
         </div>
