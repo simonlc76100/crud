@@ -2,11 +2,18 @@ import { useState, useEffect } from "react";
 
 export default function UserList() {
   const [users, setUsers] = useState([]);
+  const [hasUsers, setHasUsers] = useState(false);
+
+  console.log(users);
 
   async function getUsers() {
     const res = await fetch("http://localhost:5000/users");
     const data = await res.json();
     setUsers(data);
+
+    if (data.length > 0) {
+      setHasUsers(true);
+    }
   }
 
   useEffect(() => {
@@ -15,12 +22,18 @@ export default function UserList() {
 
   return (
     <div className="userlist-container">
-      <div className="titles">
-        <p>Prénom</p>
-        <p>Nom</p>
-        <p>Email</p>
-        <p>mot de passe</p>
-      </div>
+      <div className="titles"></div>
+
+      {hasUsers ? (
+        <div className="titles">
+          <p>Prénom</p>
+          <p>Nom</p>
+          <p>Email</p>
+          <p>mot de passe</p>
+        </div>
+      ) : (
+        <p>Aucun utilisateur</p>
+      )}
 
       {users.map((user) => (
         <div className="user" key={user.id}>
