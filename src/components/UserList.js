@@ -26,6 +26,7 @@ export default function UserList() {
     });
     const data = await res.json();
     console.log(data);
+    getUsers();
   }
 
   return (
