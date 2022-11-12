@@ -4,6 +4,7 @@ import { RiDeleteBin5Line } from "react-icons/ri";
 
 import { useEffect } from "react";
 import userNotFound from "../assets/img/user-not-found.png";
+import defaultUserIcon from "../assets/img/default-user-icon.png";
 
 export default function UserList({ users, getUsers, isEdit, setIsEdit, setUserData }) {
   useEffect(() => {
@@ -27,6 +28,7 @@ export default function UserList({ users, getUsers, isEdit, setIsEdit, setUserDa
         password: "",
         confirmPassword: "",
         passwordMatch: true,
+        icon: defaultUserIcon,
       });
     }
   }
@@ -46,6 +48,7 @@ export default function UserList({ users, getUsers, isEdit, setIsEdit, setUserDa
       password: user.password,
       confirmPassword: user.password,
       passwordMatch: true,
+      icon: user.icon,
       id: user.id,
     });
   }
@@ -59,6 +62,7 @@ export default function UserList({ users, getUsers, isEdit, setIsEdit, setUserDa
             <div className="separator"></div>
           </div>
           <div className="titles">
+            <div id="blank"></div>
             <p>Prénom</p>
             <p>Nom</p>
             <p>Email</p>
@@ -74,6 +78,7 @@ export default function UserList({ users, getUsers, isEdit, setIsEdit, setUserDa
 
       {users.map((user) => (
         <div className="user" key={user.id}>
+          <img src={user.icon} alt="user-icon" />
           <p>{user.firstname}</p>
           <p>{user.lastname}</p>
           <p>{user.email}</p>

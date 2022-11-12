@@ -1,6 +1,7 @@
 import "./App.css";
 import Form from "./components/Form";
 import UserList from "./components/UserList";
+import defaultUserIcon from "./assets/img/default-user-icon.png";
 
 import { useState } from "react";
 
@@ -18,6 +19,7 @@ export default function App() {
     password: "",
     confirmPassword: "",
     passwordMatch: true,
+    icon: defaultUserIcon,
     id: 0,
   });
 

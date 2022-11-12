@@ -1,4 +1,6 @@
 import "../assets/styles/Form.css";
+import defaultUserIcon from "../assets/img/default-user-icon.png";
+import { AiOutlineUpload } from "react-icons/ai";
 
 export default function Form({ userData, setUserData, isEdit, setIsEdit, getUsers }) {
   function handleChange(e) {
@@ -21,6 +23,10 @@ export default function Form({ userData, setUserData, isEdit, setIsEdit, getUser
         break;
       case "confirmPassword":
         setUserData({ ...userData, confirmPassword: value });
+        break;
+
+      case "icon":
+        setUserData({ ...userData, icon: URL.createObjectURL(e.target.files[0]) });
         break;
       default:
         break;
@@ -63,6 +69,7 @@ export default function Form({ userData, setUserData, isEdit, setIsEdit, getUser
       password: "",
       confirmPassword: "",
       passwordMatch: true,
+      icon: defaultUserIcon,
     });
   }
 
@@ -96,6 +103,7 @@ export default function Form({ userData, setUserData, isEdit, setIsEdit, getUser
       password: "",
       confirmPassword: "",
       passwordMatch: true,
+      icon: defaultUserIcon,
     });
   }
 
@@ -105,6 +113,24 @@ export default function Form({ userData, setUserData, isEdit, setIsEdit, getUser
         <div className="title">Formulaire Utilisateur</div>
         <div className="separator"></div>
         <form className="user-form" onSubmit={handleSubmit}>
+          <div className="icon-section">
+            <div className="title-icon-container">
+              <p>Photo de profil</p>
+              <div className="icon-container">
+                <img src={userData.icon} alt="user icon" />
+                <div className="edit-icon">
+                  <AiOutlineUpload />
+                  <input
+                    type="file"
+                    name="icon"
+                    id="icon"
+                    accept="image/*"
+                    onChange={handleChange}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
           <div className="section">
             <div className="input-container">
               <label>

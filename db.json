@@ -1,3 +1,15 @@
 {
-  "users": []
+  "users": [
+    {
+      "firstname": "pierre",
+      "lastname": "jean",
+      "username": "test",
+      "email": "pierre@jean",
+      "password": "a",
+      "confirmPassword": "a",
+      "passwordMatch": true,
+      "icon": "/static/media/default-user-icon.a6143582309785dca610.png",
+      "id": 1
+    }
+  ]
 }
