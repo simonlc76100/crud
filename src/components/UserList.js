@@ -26,6 +26,7 @@ export default function UserList({ users, getUsers, isEdit, setIsEdit, setUserDa
         email: "",
         password: "",
         confirmPassword: "",
+        passwordMatch: true,
       });
     }
   }
