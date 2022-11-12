@@ -1,24 +1,13 @@
-p{
-    margin: 0;
-    padding: 0;
+.app-container {
+  width: inherit;
+  height: inherit;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
-.titles{
-    display: flex;
-}
-
-.user{
-    display: flex;
-}
-
-.userlist-container p{
-    min-width: 150px;
-}
-
-.section{
-    display:flex
-}
-
-.input-container input{
-    display: block;
+p {
+  margin: 0;
+  padding: 0;
 }

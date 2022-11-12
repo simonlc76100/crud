@@ -1,0 +1,86 @@
+.userlist-container {
+  min-width: 600px;
+  min-height: 500px;
+  background-color: white;
+  padding: 50px;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  margin-right: 100px;
+}
+
+.userlist-container p {
+  min-width: 170px;
+}
+
+.no-user {
+  min-width: 600px;
+  min-height: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.no-user p {
+  font-family: "Montserrat", sans-serif;
+  font-size: 25px;
+  font-weight: 600;
+}
+
+.no-user img {
+  width: 350px;
+  height: 350px;
+}
+
+.title-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.titles {
+  display: flex;
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  margin: 0px 0px 10px 0px;
+}
+
+.user p {
+  max-width: 170px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.buttons {
+  margin-left: 30px;
+}
+
+.buttons button {
+  margin: 0px 0px 0px 10px;
+  width: 40px;
+  height: 40px;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  outline: none;
+  font-family: "Montserrat", sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+
+  background-color: #e0e0e0;
+  color: white;
+}
+
+#edit {
+  background-color: #86a8e7;
+}
+
+#delete {
+  background-color: #f44336;
+}

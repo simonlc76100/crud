@@ -1,3 +1,5 @@
+import "../assets/styles/Form.css";
+
 export default function Form({ userData, setUserData, isEdit, setIsEdit, getUsers }) {
   function handleChange(e) {
     const { name, value } = e.target;
@@ -66,6 +68,7 @@ export default function Form({ userData, setUserData, isEdit, setIsEdit, getUser
     <>
       <div className="form-container">
         <div className="title">Formulaire Utilisateur</div>
+        <div className="separator"></div>
         <form className="user-form" onSubmit={handleSubmit}>
           <div className="section">
             <div className="input-container">
@@ -76,6 +79,7 @@ export default function Form({ userData, setUserData, isEdit, setIsEdit, getUser
                   name="firstname"
                   value={userData.firstname}
                   onChange={handleChange}
+                  required
                 />
               </label>
             </div>
@@ -87,6 +91,7 @@ export default function Form({ userData, setUserData, isEdit, setIsEdit, getUser
                   name="lastname"
                   value={userData.lastname}
                   onChange={handleChange}
+                  required
                 />
               </label>
             </div>
@@ -100,6 +105,7 @@ export default function Form({ userData, setUserData, isEdit, setIsEdit, getUser
                   name="email"
                   value={userData.email}
                   onChange={handleChange}
+                  required
                 />
               </label>
             </div>
@@ -111,13 +117,17 @@ export default function Form({ userData, setUserData, isEdit, setIsEdit, getUser
                   name="password"
                   value={userData.password}
                   onChange={handleChange}
+                  required
                 />
               </label>
             </div>
           </div>
-          <button type="submit">
-            {isEdit ? "Éditer utilisateur" : "Ajouter utilisateur"}
-          </button>
+
+          <div className="submit-container">
+            <button type="submit">
+              {isEdit ? "Éditer utilisateur" : "Ajouter utilisateur"}
+            </button>
+          </div>
         </form>
       </div>
     </>
