@@ -27,8 +27,11 @@ export default function UserList({ users, getUsers, setIsEdit, setUserData }) {
     setUserData({
       firstname: user.firstname,
       lastname: user.lastname,
+      username: user.username,
       email: user.email,
       password: user.password,
+      confirmPassword: user.password,
+      passwordMatch: true,
       id: user.id,
     });
   }

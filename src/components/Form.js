@@ -10,11 +10,17 @@ export default function Form({ userData, setUserData, isEdit, setIsEdit, getUser
       case "lastname":
         setUserData({ ...userData, lastname: value });
         break;
+      case "username":
+        setUserData({ ...userData, username: value });
+        break;
       case "email":
         setUserData({ ...userData, email: value });
         break;
       case "password":
         setUserData({ ...userData, password: value });
+        break;
+      case "confirmPassword":
+        setUserData({ ...userData, confirmPassword: value });
         break;
       default:
         break;
@@ -33,6 +39,11 @@ export default function Form({ userData, setUserData, isEdit, setIsEdit, getUser
   }
 
   async function addUser() {
+    if (userData.password !== userData.confirmPassword) {
+      setUserData({ ...userData, passwordMatch: false });
+      return;
+    }
+
     await fetch("http://localhost:5000/users", {
       method: "POST",
       headers: {
@@ -43,11 +54,26 @@ export default function Form({ userData, setUserData, isEdit, setIsEdit, getUser
       .then((res) => res.json())
       .then((data) => console.log(data));
     getUsers();
-    setUserData({ firstname: "", lastname: "", email: "", password: "" });
+    setUserData({
+      firstname: "",
+      lastname: "",
+      username: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+      passwordMatch: true,
+      id: 0,
+    });
   }
 
   async function editUser(id) {
     console.log(id);
+
+    if (userData.password !== userData.confirmPassword) {
+      setUserData({ ...userData, passwordMatch: false });
+      return;
+    }
+
     await fetch(`http://localhost:5000/users/${id}`, {
       method: "PUT",
       headers: {
@@ -61,7 +87,16 @@ export default function Form({ userData, setUserData, isEdit, setIsEdit, getUser
 
     setIsEdit(false);
 
-    setUserData({ firstname: "", lastname: "", email: "", password: "", id: 0 });
+    setUserData({
+      firstname: "",
+      lastname: "",
+      username: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+      passwordMatch: true,
+      id: 0,
+    });
   }
 
   return (
@@ -99,7 +134,19 @@ export default function Form({ userData, setUserData, isEdit, setIsEdit, getUser
           <div className="section">
             <div className="input-container">
               <label>
-                Email
+                Nom d'utilisateur
+                <input
+                  type="text"
+                  name="username"
+                  value={userData.username}
+                  onChange={handleChange}
+                  required
+                />
+              </label>
+            </div>
+            <div className="input-container">
+              <label>
+                E-mail
                 <input
                   type="email"
                   name="email"
@@ -109,6 +156,8 @@ export default function Form({ userData, setUserData, isEdit, setIsEdit, getUser
                 />
               </label>
             </div>
+          </div>
+          <div className="section">
             <div className="input-container">
               <label>
                 Mot de passe
@@ -121,8 +170,19 @@ export default function Form({ userData, setUserData, isEdit, setIsEdit, getUser
                 />
               </label>
             </div>
+            <div className="input-container">
+              <label>
+                Confirmer le mot de passe
+                <input
+                  type="password"
+                  name="confirmPassword"
+                  value={userData.confirmPassword}
+                  onChange={handleChange}
+                  required
+                />
+              </label>
+            </div>
           </div>
-
           <div className="submit-container">
             <button type="submit">
               {isEdit ? "Éditer utilisateur" : "Ajouter utilisateur"}

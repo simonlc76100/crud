@@ -13,8 +13,11 @@ export default function App() {
   const [userData, setUserData] = useState({
     firstname: "",
     lastname: "",
+    username: "",
     email: "",
     password: "",
+    confirmPassword: "",
+    passwordMatch: true,
     id: 0,
   });
 
