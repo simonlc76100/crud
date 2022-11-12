@@ -171,16 +171,30 @@ export default function Form({ userData, setUserData, isEdit, setIsEdit, getUser
               </label>
             </div>
             <div className="input-container">
-              <label>
-                Confirmer le mot de passe
-                <input
-                  type="password"
-                  name="confirmPassword"
-                  value={userData.confirmPassword}
-                  onChange={handleChange}
-                  required
-                />
-              </label>
+              {userData.passwordMatch ? (
+                <label>
+                  Confirmer le mot de passe
+                  <input
+                    type="password"
+                    name="confirmPassword"
+                    value={userData.confirmPassword}
+                    onChange={handleChange}
+                    required
+                  />
+                </label>
+              ) : (
+                <label>
+                  Confirmer le mot de passe
+                  <input
+                    type="password"
+                    name="confirmPassword"
+                    value={userData.confirmPassword}
+                    onChange={handleChange}
+                    required
+                    style={{ border: "1px solid red" }}
+                  />
+                </label>
+              )}
             </div>
           </div>
           <div className="submit-container">
