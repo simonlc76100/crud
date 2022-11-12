@@ -5,7 +5,7 @@ import { RiDeleteBin5Line } from "react-icons/ri";
 import { useEffect } from "react";
 import userNotFound from "../assets/img/user-not-found.png";
 
-export default function UserList({ users, getUsers, setIsEdit, setUserData }) {
+export default function UserList({ users, getUsers, isEdit, setIsEdit, setUserData }) {
   useEffect(() => {
     getUsers();
   }, []);
@@ -15,6 +15,19 @@ export default function UserList({ users, getUsers, setIsEdit, setUserData }) {
       method: "DELETE",
     });
     getUsers();
+    //si on supprime l'utilisateur en cours d'édition
+    //on réinitialise les champs du formulaire
+    if (isEdit) {
+      setIsEdit(false);
+      setUserData({
+        firstname: "",
+        lastname: "",
+        username: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+      });
+    }
   }
 
   async function getUserToEdit(id) {

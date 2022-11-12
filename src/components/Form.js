@@ -41,6 +41,7 @@ export default function Form({ userData, setUserData, isEdit, setIsEdit, getUser
   async function addUser() {
     if (userData.password !== userData.confirmPassword) {
       setUserData({ ...userData, passwordMatch: false });
+      console.log("account not created");
       return;
     }
 
@@ -62,7 +63,6 @@ export default function Form({ userData, setUserData, isEdit, setIsEdit, getUser
       password: "",
       confirmPassword: "",
       passwordMatch: true,
-      id: 0,
     });
   }
 
@@ -71,6 +71,7 @@ export default function Form({ userData, setUserData, isEdit, setIsEdit, getUser
 
     if (userData.password !== userData.confirmPassword) {
       setUserData({ ...userData, passwordMatch: false });
+      console.log("account not edited");
       return;
     }
 
@@ -95,7 +96,6 @@ export default function Form({ userData, setUserData, isEdit, setIsEdit, getUser
       password: "",
       confirmPassword: "",
       passwordMatch: true,
-      id: 0,
     });
   }
 

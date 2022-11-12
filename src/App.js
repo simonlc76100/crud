@@ -7,7 +7,7 @@ import { useState } from "react";
 export default function App() {
   //par défaut json server ajoute un champ id à chaque objet créé et
   //incrémente/décrémente automatiquement selon l'ajout ou la suppression d'objets
-  //on ajoute quand même un champ id pour l'édition utilisateur
+  //on ajoute quand même un champ id pour récupérer l'id de l'utilisateur à éditer
   const [users, setUsers] = useState([]);
 
   const [userData, setUserData] = useState({
@@ -44,6 +44,7 @@ export default function App() {
       <UserList
         users={users}
         getUsers={getUsers}
+        isEdit={isEdit}
         setIsEdit={setIsEdit}
         setUserData={setUserData}
       />
