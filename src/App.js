@@ -20,18 +20,17 @@ export default function App() {
     confirmPassword: "",
     passwordMatch: true,
     icon: defaultUserIcon,
+    icon_uuid: "",
+    isCustomIcon: false,
     id: 0,
   });
 
   const [isEdit, setIsEdit] = useState(false);
 
   async function getUsers() {
-    await fetch("http://localhost:5000/users")
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        setUsers(data);
-      });
+    const data = await fetch("http://localhost:5000/users");
+    const users = await data.json();
+    setUsers(users);
   }
 
   return (

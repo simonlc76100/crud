@@ -1,6 +1,7 @@
 import "../assets/styles/Form.css";
 import defaultUserIcon from "../assets/img/default-user-icon.png";
 import { AiOutlineUpload } from "react-icons/ai";
+import { useEffect } from "react";
 
 export default function Form({ userData, setUserData, isEdit, setIsEdit, getUsers }) {
   function handleChange(e) {
@@ -51,15 +52,15 @@ export default function Form({ userData, setUserData, isEdit, setIsEdit, getUser
       return;
     }
 
-    await fetch("http://localhost:5000/users", {
+    const data = await fetch("http://localhost:5000/users", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ ...userData }),
-    })
-      .then((res) => res.json())
-      .then((data) => console.log(data));
+    });
+    const user = await data.json();
+    console.log(user);
     getUsers();
     setUserData({
       firstname: "",
@@ -70,6 +71,8 @@ export default function Form({ userData, setUserData, isEdit, setIsEdit, getUser
       confirmPassword: "",
       passwordMatch: true,
       icon: defaultUserIcon,
+      icon_uuid: "",
+      isCustomIcon: false,
     });
   }
 
@@ -82,19 +85,17 @@ export default function Form({ userData, setUserData, isEdit, setIsEdit, getUser
       return;
     }
 
-    await fetch(`http://localhost:5000/users/${id}`, {
+    const data = await fetch(`http://localhost:5000/users/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ ...userData }),
-    })
-      .then((res) => res.json())
-      .then((data) => console.log(data));
+    });
+    const user = await data.json();
+    console.log(user);
     getUsers();
-
     setIsEdit(false);
-
     setUserData({
       firstname: "",
       lastname: "",
@@ -104,8 +105,66 @@ export default function Form({ userData, setUserData, isEdit, setIsEdit, getUser
       confirmPassword: "",
       passwordMatch: true,
       icon: defaultUserIcon,
+      icon_uuid: "",
+      isCustomIcon: false,
     });
   }
+
+  async function uploadFile(e) {
+    e.preventDefault();
+    const data = new FormData();
+    data.append("file", e.target.files[0]);
+    data.append("UPLOADCARE_PUB_KEY", "c3ed1886422a4f264546");
+    const response = await fetch("https://upload.uploadcare.com/base/", {
+      method: "POST",
+      body: data,
+    });
+    const result = await response.json();
+    setUserData({ ...userData, icon_uuid: result.file });
+  }
+
+  async function getFile() {
+    const response = await fetch(
+      `https://api.uploadcare.com/files/${userData.icon_uuid}/`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Uploadcare.Simple c3ed1886422a4f264546:93e28f10a91b4ed75adc",
+        },
+      }
+    );
+    const result = await response.json();
+    setUserData({ ...userData, icon: result.original_file_url, isCustomIcon: true });
+  }
+
+  async function deleteFile() {
+    const response = await fetch(
+      `https://api.uploadcare.com/files/${userData.icon_uuid}/`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Uploadcare.Simple c3ed1886422a4f264546:93e28f10a91b4ed75adc",
+        },
+      }
+    );
+    const result = await response.json();
+    console.log(result);
+  }
+
+  async function changeIcon(e) {
+    if (userData.isCustomIcon) {
+      await deleteFile();
+    }
+    await uploadFile(e);
+  }
+
+  useEffect(() => {
+    if (userData.icon_uuid !== "") {
+      getFile();
+    }
+  }, [userData.icon_uuid]);
 
   return (
     <>
@@ -125,7 +184,9 @@ export default function Form({ userData, setUserData, isEdit, setIsEdit, getUser
                     name="icon"
                     id="icon"
                     accept="image/*"
-                    onChange={handleChange}
+                    onChange={(e) => {
+                      userData.isCustomIcon ? changeIcon(e) : uploadFile(e);
+                    }}
                   />
                 </div>
               </div>

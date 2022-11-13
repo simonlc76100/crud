@@ -11,10 +11,24 @@ export default function UserList({ users, getUsers, isEdit, setIsEdit, setUserDa
     getUsers();
   }, []);
 
-  async function deleteUser(id) {
-    await fetch(`http://localhost:5000/users/${id}`, {
+  async function deleteUser(id, icon_uuid) {
+    const data = await fetch(`http://localhost:5000/users/${id}`, {
       method: "DELETE",
     });
+    const user = await data.json();
+    console.log(user);
+
+    if (icon_uuid !== "") {
+      const response = await fetch(`https://api.uploadcare.com/files/${icon_uuid}/`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Uploadcare.Simple c3ed1886422a4f264546:93e28f10a91b4ed75adc",
+        },
+      });
+      const result = await response.json();
+      console.log(result);
+    }
     getUsers();
     //si on supprime l'utilisateur en cours d'édition
     //on réinitialise les champs du formulaire
@@ -29,6 +43,8 @@ export default function UserList({ users, getUsers, isEdit, setIsEdit, setUserDa
         confirmPassword: "",
         passwordMatch: true,
         icon: defaultUserIcon,
+        icon_uuid: "",
+        isCustomIcon: false,
       });
     }
   }
@@ -49,7 +65,9 @@ export default function UserList({ users, getUsers, isEdit, setIsEdit, setUserDa
       confirmPassword: user.password,
       passwordMatch: true,
       icon: user.icon,
+      icon_uuid: user.icon_uuid,
       id: user.id,
+      isCustomIcon: user.isCustomIcon,
     });
   }
 
@@ -86,7 +104,7 @@ export default function UserList({ users, getUsers, isEdit, setIsEdit, setUserDa
             <button id="edit" onClick={() => getUserToEdit(user.id)}>
               <BiEdit />
             </button>
-            <button id="delete" onClick={() => deleteUser(user.id)}>
+            <button id="delete" onClick={() => deleteUser(user.id, user.icon_uuid)}>
               <RiDeleteBin5Line />
             </button>
           </div>
