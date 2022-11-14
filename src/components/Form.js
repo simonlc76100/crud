@@ -217,7 +217,7 @@ export default function Form({ userData, setUserData, isEdit, setIsEdit, getUser
           <div className="section">
             <div className="input-container">
               <label>
-                Nom d'utilisateur
+                Pseudo
                 <input
                   type="text"
                   name="username"

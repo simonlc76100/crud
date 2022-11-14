@@ -1,8 +1,8 @@
 .userlist-container {
   min-width: 600px;
-  min-height: 655px;
+  min-height: 600px;
   background-color: white;
-  padding: 50px;
+  padding: 35px;
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   margin-right: 100px;
@@ -46,7 +46,8 @@
 }
 
 #blank {
-  width: 50px;
+  width: 40px;
+  margin-right: 40px;
 }
 
 .user {
@@ -65,7 +66,7 @@
   width: 40px;
   height: 40px;
   object-fit: cover;
-  margin-right: 10px;
+  margin-right: 40px;
   border-radius: 50%;
 }
 

@@ -102,9 +102,8 @@ export default function UserList({
           </div>
           <div className="titles">
             <div id="blank"></div>
-            <p>Prénom</p>
-            <p>Nom</p>
-            <p>Email</p>
+            <p>Pseudo</p>
+            <p>E-mail</p>
           </div>
         </div>
       ) : (
@@ -118,8 +117,7 @@ export default function UserList({
       {users.map((user) => (
         <div className="user" key={user.id}>
           <img src={user.icon} alt="user-icon" />
-          <p>{user.firstname}</p>
-          <p>{user.lastname}</p>
+          <p>{user.username}</p>
           <p>{user.email}</p>
           <div className="buttons">
             <button id="edit" onClick={() => getUserToEdit(user.id)}>
