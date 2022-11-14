@@ -47,6 +47,7 @@ export default function App() {
         getUsers={getUsers}
         isEdit={isEdit}
         setIsEdit={setIsEdit}
+        userData={userData}
         setUserData={setUserData}
       />
     </div>

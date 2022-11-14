@@ -6,7 +6,14 @@ import { useEffect } from "react";
 import userNotFound from "../assets/img/user-not-found.png";
 import defaultUserIcon from "../assets/img/default-user-icon.png";
 
-export default function UserList({ users, getUsers, isEdit, setIsEdit, setUserData }) {
+export default function UserList({
+  users,
+  getUsers,
+  isEdit,
+  setIsEdit,
+  userData,
+  setUserData,
+}) {
   useEffect(() => {
     getUsers();
   }, []);
@@ -30,9 +37,23 @@ export default function UserList({ users, getUsers, isEdit, setIsEdit, setUserDa
       console.log(result);
     }
     getUsers();
-    //si on supprime l'utilisateur en cours d'édition
-    //on réinitialise les champs du formulaire
+
     if (isEdit) {
+      //si on supprime l'utilisateur en cours d'édition, on supprime
+      //l'icone qu'onvient d'upload depuis le formulaire
+      const response = await fetch(
+        `https://api.uploadcare.com/files/${userData.icon_uuid}/`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Uploadcare.Simple c3ed1886422a4f264546:93e28f10a91b4ed75adc",
+          },
+        }
+      );
+      const result = await response.json();
+      console.log(result);
+
       setIsEdit(false);
       setUserData({
         firstname: "",

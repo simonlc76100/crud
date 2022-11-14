@@ -25,10 +25,6 @@ export default function Form({ userData, setUserData, isEdit, setIsEdit, getUser
       case "confirmPassword":
         setUserData({ ...userData, confirmPassword: value });
         break;
-
-      case "icon":
-        setUserData({ ...userData, icon: URL.createObjectURL(e.target.files[0]) });
-        break;
       default:
         break;
     }
